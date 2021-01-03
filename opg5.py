@@ -8,20 +8,24 @@ t_slutt = 20  # sluttverdi for t
 
 N = 10000  # antall steg
 h = (t_slutt-t_0)/(N-1)  # regner ut steglengden
+t = np.linspace(t_0, t_slutt, N)  # Array med alle tidsverdier
 
-f = np.zeros(N)
-f[0] = 1000
+f = np.zeros(N)  # lager array med N nuller
+f[0] = f_0  # Første element er startverdien for f (antall harer satt ut)
 
 
+# Funksjon for den deriverte
 def f_derivert(ft):
     return k*ft
 
 
-t = np.linspace(t_0, t_slutt, N)
-
+# Eulers metode
 for i in range(N-1):
-    # bruker formel for å regne ut "neste steg"
     f[i+1] = f[i] + f_derivert(f[i])*h
 
+# Printer antall harepuser
+print(f"Det blir {f[-1]} harepuser etter {t_slutt - t_0} måneder.")
+
+# Plotter resultat
 plt.plot(t, f)
 plt.show()
